@@ -10,7 +10,7 @@ const UserList = () => {
   }, []);
  
   const getUsers = async () => {
-    const response = await axios.get("ttps://backend-nodejs12.herokuapp.com/users");
+    const response = await axios.get("https://backend-nodejs12.herokuapp.com/users");
     setUser(response.data);
   };
  

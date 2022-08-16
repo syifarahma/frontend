@@ -10,13 +10,13 @@ const UserList = () => {
   }, []);
  
   const getUsers = async () => {
-    const response = await axios.get("https://backend-nodejs12.herokuapp.com/users");
+    const response = await axios.get("https://iniuasbackend.herokuapp.com/users");
     setUser(response.data);
   };
  
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`https://backend-nodejs12.herokuapp.com/users/${id}`);
+      await axios.delete(`https://iniuasbackend.herokuapp.com/users/${id}`);
       getUsers();
     } catch (error) {
       console.log(error);
@@ -32,20 +32,25 @@ const UserList = () => {
         <table className="table is-striped is-fullwidth mt-2">
           <thead>
             <tr>
-              <th>No</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>Actions</th>
+              <th width="21%">Nama</th>
+              <th width="21%">NIM</th>
+              <th width="21%">Kelas</th>
+              <th width="21%">Semester</th>
+              <th width="41%">Jenis Kelamin</th>
+              <th width="21%">Alamat</th>
+              <th width="21%">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={user._id}>
                 <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.gender}</td>
+                <td>{user.Nama}</td>
+                <td>{user.NIM}</td>
+                <td>{user.Kelas}</td>
+                <td>{user.Semester}</td>
+                <td>{user.JenisKelamin}</td>
+                <td>{user.Alamat}</td>
                 <td>
                   <Link
                     to={`edit/${user._id}`}

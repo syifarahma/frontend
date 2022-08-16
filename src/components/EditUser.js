@@ -3,9 +3,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
  
 const EditUser = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("Male");
+  const [Nama, setNama] = useState("");
+  const [NIM, setNIM] = useState("");
+  const [Kelas, setKelas] = useState("");
+  const [Semester, setSemester] = useState("");
+  const [JenisKelamin, setJenisKelamin] = useState("Pilih");
+  const [Alamat, setAlamat] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
  
@@ -14,19 +17,25 @@ const EditUser = () => {
   }, []);
  
   const getUserById = async () => {
-    const response = await axios.get(`https://backend-nodejs12.herokuapp.com/users/${id}`);
-    setName(response.data.name);
-    setEmail(response.data.email);
-    setGender(response.data.gender);
+    const response = await axios.get(`https://iniuasbackend.herokuapp.com/users/${id}`);
+    setNama(response.data.Nama);
+    setNIM(response.data.NIM);
+    setKelas(response.data.Kelas);
+    setSemester(response.data.Semester);
+    setJenisKelamin(response.data.JenisKelamin);
+    setAlamat(response.data.Alamat);
   };
  
   const updateUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://backend-nodejs12.herokuapp.com/users/${id}`, {
-        name,
-        email,
-        gender,
+      await axios.patch(`https://iniuasbackend.herokuapp.com/users/${id}`, {
+        Nama,
+        NIM,
+        Kelas,
+        Semester,
+        JenisKelamin,
+        Alamat,
       });
       navigate("/");
     } catch (error) {
@@ -39,43 +48,79 @@ const EditUser = () => {
       <div className="column is-half">
         <form onSubmit={updateUser}>
           <div className="field">
-            <label className="label">Name</label>
+            <label className="label">Nama</label>
             <div className="control">
               <input
                 type="text"
                 className="input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
+                value={Nama}
+                onChange={(e) => setNama(e.target.value)}
+                placeholder="Nama"
               />
             </div>
           </div>
           <div className="field">
-            <label className="label">Email</label>
+            <label className="label">NIM</label>
             <div className="control">
               <input
                 type="text"
                 className="input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+                value={NIM}
+                onChange={(e) => setNIM(e.target.value)}
+                placeholder="NIM"
               />
             </div>
           </div>
           <div className="field">
-            <label className="label">Gender</label>
+            <label className="label">Kelas</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={Kelas}
+                onChange={(e) => setKelas(e.target.value)}
+                placeholder="Kelas"
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Semester</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={Semester}
+                onChange={(e) => setSemester(e.target.value)}
+                placeholder="Semester"
+              />                            
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">JenisKelamin</label>
             <div className="control">
               <div className="select is-fullwidth">
                 <select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
+                  value={JenisKelamin}
+                  onChange={(e) => setJenisKelamin(e.target.value)}
                 >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
+                  <option value="Male">Laki-laki</option>
+                  <option value="Female">Perempuan</option>
                 </select>
               </div>
             </div>
           </div>
+          <div className="field">
+            <label className="label">Alamat</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={Alamat}
+                onChange={(e) => setAlamat(e.target.value)}
+                placeholder="Alamat"
+                />
+            </div>
+          </div>                             
           <div className="field">
             <div className="control">
               <button type="submit" className="button is-success">
@@ -88,5 +133,4 @@ const EditUser = () => {
     </div>
   );
 };
- 
 export default EditUser;

@@ -3,18 +3,24 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
  
 const AddUser = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("Male");
+  const [Nama, setNama] = useState("");
+  const [NIM, setNIM] = useState("");
+  const [Kelas, setKelas] = useState("");
+  const [Semester, setSemester] = useState("");
+  const [JenisKelamin, setJenisKelamin] = useState("Pilih");
+  const [Alamat, setAlamat] = useState("");
   const navigate = useNavigate();
  
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://backend-nodejs12.herokuapp.com/users", {
-        name,
-        email,
-        gender,
+      await axios.post("https://iniuasbackend.herokuapp.com/users", {
+        Nama,
+        NIM,
+        Kelas,
+        Semester,
+        JenisKelamin,
+        Alamat,
       });
       navigate("/");
     } catch (error) {
@@ -27,40 +33,76 @@ const AddUser = () => {
       <div className="column is-half">
         <form onSubmit={saveUser}>
           <div className="field">
-            <label className="label">Name</label>
+            <label className="label">Nama</label>
             <div className="control">
               <input
                 type="text"
                 className="input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
+                value={Nama}
+                onChange={(e) => setNama(e.target.value)}
+                placeholder="Nama"
               />
             </div>
           </div>
           <div className="field">
-            <label className="label">Email</label>
+            <label className="label">NIM</label>
             <div className="control">
               <input
                 type="text"
                 className="input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+                value={NIM}
+                onChange={(e) => setNIM(e.target.value)}
+                placeholder="NIM"
               />
             </div>
           </div>
           <div className="field">
-            <label className="label">Gender</label>
+            <label className="label">Kelas</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={Kelas}
+                onChange={(e) => setKelas(e.target.value)}
+                placeholder="Kelas"
+              />
+              </div>
+          </div>
+          <div className="field">
+            <label className="label">Semester</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={Semester}
+                onChange={(e) => setSemester(e.target.value)}
+                placeholder="Semester"
+              />
+              </div>
+          </div>
+          <div className="field">
+            <label className="label">Jenis Kelamin</label>
             <div className="control">
               <div className="select is-fullwidth">
                 <select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
+                  value={JenisKelamin}
+                  onChange={(e) => setJenisKelamin(e.target.value)}
                 >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>              
+              </div>
+          </div>
+          <div className="field">
+            <label className="label">Alamat</label>
+            <div className="control">
+              <input
+                type="text"
+                className="input"
+                value={Alamat}
+                onChange={(e) => setAlamat(e.target.value)}
+                placeholder="Alamat"
+              />
               </div>
             </div>
           </div>
